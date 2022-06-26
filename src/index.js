@@ -48,6 +48,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      orderIsAsc: true,
       activeMove: null,
     };
   }
@@ -67,6 +68,12 @@ class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+    });
+  }
+
+  handleClickOrderToggleButton() {
+    this.setState({
+      orderIsAsc: !this.state.orderIsAsc,
     });
   }
 
@@ -107,12 +114,16 @@ class Game extends React.Component {
       );
     });
 
+    if (!this.state.orderIsAsc) moves.reverse();
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
+
+    const orderToggleButtonLabel = this.state.orderIsAsc ? 'Desc' : 'Asc';
 
     return (
       <div className="game">
@@ -124,6 +135,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <button onClick={() => this.handleClickOrderToggleButton()}>
+            {orderToggleButtonLabel}
+          </button>
           <ol id="moves">{moves}</ol>
         </div>
       </div>
