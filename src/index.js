@@ -73,6 +73,7 @@ class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      selectedMove: null,
     });
   }
 
