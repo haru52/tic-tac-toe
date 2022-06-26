@@ -54,7 +54,7 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       orderIsAsc: true,
-      activeMove: null,
+      selectedMove: null,
     };
   }
 
@@ -91,7 +91,7 @@ class Game extends React.Component {
 
   handleClickMove(step) {
     this.setState({
-      activeMove: step,
+      selectedMove: step,
     });
     this.jumpTo(step);
   }
@@ -110,12 +110,11 @@ class Game extends React.Component {
     const winningLine = winnerInfo ? winnerInfo.line : [];
 
     const moves = history.map((step, move) => {
-      const active = (this.state.activeMove === move).toString();
       const desc = move ?
         'Go to move #' + move + ' ' + this.convertIndexToLocation(step.locationIndex) :
         'Go to game start';
       return (
-        <li key={move} active={active}>
+        <li key={move} className={this.state.selectedMove === move ? 'selected' : ''}>
           <button onClick={() => this.handleClickMove(move)}>{desc}</button>
         </li>
       );

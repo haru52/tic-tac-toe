@@ -53,6 +53,6 @@ ol, ul {
   margin-left: 20px;
 }
 
-#moves > li[active="true"], #moves > li[active="true"] * {
+#moves > li.selected, #moves > li.selected * {
   font-weight: bold;
 }
