@@ -84,7 +84,7 @@ class Game extends React.Component {
     });
   }
 
-  handleMoveClick(step) {
+  handleClickMove(step) {
     this.setState({
       activeMove: step,
     });
@@ -109,7 +109,7 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move} active={active}>
-          <button onClick={() => this.handleMoveClick(move)}>{desc}</button>
+          <button onClick={() => this.handleClickMove(move)}>{desc}</button>
         </li>
       );
     });
