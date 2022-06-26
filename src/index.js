@@ -53,6 +53,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      activeMove: null,
     };
   }
 
@@ -81,6 +82,13 @@ class Game extends React.Component {
     });
   }
 
+  handleMoveClick(step) {
+    this.setState({
+      activeMove: step,
+    });
+    this.jumpTo(step);
+  }
+
   convertIndexToLocation(index) {
     const col = index % 3 + 1;
     const row = Math.floor(index / 3) + 1;
@@ -93,12 +101,13 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
+      const active = (this.state.activeMove === move).toString();
       const desc = move ?
         'Go to move #' + move + ' ' + this.convertIndexToLocation(step.move) :
         'Go to game start';
       return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        <li key={move} active={active}>
+          <button onClick={() => this.handleMoveClick(move)}>{desc}</button>
         </li>
       );
     });
@@ -120,7 +129,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol id="moves">{moves}</ol>
         </div>
       </div>
     );

@@ -48,3 +48,7 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+#moves > li[active="true"], #moves > li[active="true"] * {
+  font-weight: bold;
+}
