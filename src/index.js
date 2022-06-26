@@ -103,6 +103,10 @@ class Game extends React.Component {
     return `(${col}, ${row})`;
   }
 
+  allSquaresFilled(squares) {
+    return !squares.includes(null);
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -126,7 +130,9 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
-    } else {
+    } else if (this.allSquaresFilled(current.squares)) {
+      status = 'Draw';
+    }else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
